@@ -31,3 +31,5 @@ export const buildTest = () => {
     ).not.toThrow();
   }, 120000);
 };
+
+describe('build e2e', buildTest);

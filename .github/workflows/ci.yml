@@ -5,7 +5,8 @@ on:
       - 'master'
     pull_request:
       branches:
-        - '**'
+        - 'random'
+        # - '**'
 jobs:
   pr-test:
     uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master

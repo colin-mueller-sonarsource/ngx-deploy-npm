@@ -12,7 +12,7 @@ export const nxPlugins = () => {
   initNgxDeployNPMProject();
 
   beforeEach(async () => {
-    await runCommandAsync(`yarn add -D ${nxPlugin}`);
+    await runCommandAsync(`npm install -D ${nxPlugin}`);
   }, 120000);
 
   beforeEach(async () => {

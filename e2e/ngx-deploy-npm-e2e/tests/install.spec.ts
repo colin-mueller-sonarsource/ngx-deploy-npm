@@ -43,3 +43,5 @@ export const installTest = () => {
     expect(projectWorkSpace.targets?.deploy).toEqual(expectedTarget);
   });
 };
+
+describe('install e2e', installTest);
