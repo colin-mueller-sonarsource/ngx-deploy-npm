@@ -38,10 +38,13 @@
 
 **Table of contents:**
 
-- [🚀 Quick Start (local development)](#quick-start)
+- [🚀 Quick Start (local development)](#quick-start-local-development)
 - [🚀 Continuous Delivery](#continuous-delivery)
-- [❓ What is done when executing `nx deploy`](#what-is-done-when-executing-nx-deploy)
+- [❓What is done when executing `nx deploy`](#what-is-done-when-executing-nx-deploy)
 - [📦 Options](#options)
+  - [install/ng-add](#installng-add)
+    - [--projects](#--projects)
+  - [deploy](#deploy)
     - [--build-target](#--build-target)
     - [--no-build](#--no-build)
     - [--package-version](#--package-version)
@@ -62,7 +65,7 @@
 >
 > Also, when you find references to `workspace.json`, you can find your file under the name `angular.json`.
 
-## 🚀 Quick Start (local development) <a name="quick-start"></a>
+## 🚀 Quick Start (local development) <a name="quick-start-local-development"></a>
 
 1. Add `ngx-deploy-npm` to your project. It will configure all your publishable libraries present in the project:
 
@@ -89,7 +92,7 @@
 
 ## 🚀 Continuous Delivery <a name="continuous-delivery"></a>
 
-Independently of the CI/CD that you are using, you need an NPM token. To do so, you have two methods.
+Independently of the CI/CD you are using, you need an NPM token. To do so, you have two methods.
 
 - Via [NPM web page](https://docs.npmjs.com/creating-and-viewing-authentication-tokens)
 - Using [`npm token create`](https://docs.npmjs.com/cli/token.html)
@@ -137,14 +140,28 @@ jobs:
 ## ❓What is done when executing `nx deploy` <a name="what-is-done-when-executing-nx-deploy"></a>
 
 1. Will build the application using the target `build`
-   - This will be omitted if the paratemer `--no-build` is set
+   - This will be omitted if the parameter `--no-build` is set
 2. Execute `npm publish`
 
-This is the activity diagram
+The following is the activity diagram.
 
 ![Execution activity diagram](docs/UML/principal-activity-diagram.jpg)
 
 ## 📦 Options <a name="options"></a>
+
+### install/ng-add
+
+#### --projects
+
+- **optional**
+- Default: Doesn't have any default value (array string)
+- Example:
+  - `nx generate ngx-deploy-npm:install --projects=lib-1,lib-2` – Only `lib-1` and `lib-2` are going to be configurated
+
+Specify which libraries should be configurated. Useful when you have a workspace with several libraries and don't want to overwrite existing configuration
+Should be `,` separated, without spaces.
+
+### deploy
 
 #### --build-target
 
