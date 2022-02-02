@@ -8,7 +8,7 @@ env:
 
 jobs:
   pr-test:
-    uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master
+    uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@fix-sonar-coverage #@master
 
   check-commit-lint:
     name: Check commit message follows guidelines
@@ -23,10 +23,18 @@ jobs:
   pr-analysis:
     name: SonarCloud Pr Analysis
     runs-on: ubuntu-latest
+    needs: pr-test
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+
+      # - uses: ./.github/actions/download-coverage-report
+
+      - uses: ./.github/actions/setup
+      - run: npx nx test --code-coverage
+      - run: ls -l coverage/packages/ngx-deploy-npm
+      - run: cat coverage/packages/ngx-deploy-npm/lcov.info
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
